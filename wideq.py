@@ -944,6 +944,7 @@ class WASHERWATERTEMP(enum.Enum):
     TWENTY = "@WM_TITAN2_OPTION_TEMP_20_W"
     THIRTY = "@WM_TITAN2_OPTION_TEMP_30_W"
     FOURTY = "@WM_TITAN2_OPTION_TEMP_40_W"
+    FIFTY = "@WM_TITAN2_OPTION_TEMP_50_W"
     SIXTY = "@WM_TITAN2_OPTION_TEMP_60_W"
     NINTYFIVE = "@WM_TITAN2_OPTION_TEMP_95_W"
 
@@ -961,6 +962,22 @@ class WASHERSPINSPEED(enum.Enum):
     SPIN_1400 = "@WM_TITAN2_OPTION_SPIN_1400_W"
     SPIN_1600 = "@WM_TITAN2_OPTION_SPIN_1600_W"
     MAX = "@WM_TITAN2_OPTION_SPIN_MAX_W"
+
+class WASHERDRYLEVEL(enum.Enum):
+    
+    IRON = "@WM_TITAN2_OPTION_DRY_IRON_W"
+    NORMAL = "@WM_TITAN2_OPTION_DRY_NORMAL_W"
+    LOW = "@WM_TITAN2_OPTION_DRY_LOW_W"
+    ENERGY = "@WM_TITAN2_OPTION_DRY_ENERGY_W"
+    ECO = "@WM_TITAN2_OPTION_DRY_ECO_W"
+    SPEED = "@WM_TITAN2_OPTION_DRY_SPEED_W"
+    COOLING = "@WM_TITAN2_OPTION_DRY_COOLING_W"
+    VERY = "@WM_TITAN2_OPTION_DRY_VERY_W"
+    TIME_30 = "@WM_TITAN2_OPTION_DRY_30_W"
+    TIME_60 = "@WM_TITAN2_OPTION_DRY_60_W"
+    TIME_90 = "@WM_TITAN2_OPTION_DRY_90_W"
+    TIME_120 = "@WM_TITAN2_OPTION_DRY_120_W"
+    TIME_150 = "@WM_TITAN2_OPTION_DRY_150_W"    
 
 class WASHERERROR(enum.Enum):
     
@@ -1074,8 +1091,11 @@ class WasherStatus(object):
         return self.data['Reserve_Time_H']
     
     @property
-    def drylevel(self):
-        return self.data['DryLevel']
+    def drylevel_option_state(self):
+        drylevel = self.lookup_enum('DryLevel')
+        if drylevel == '-':
+            return 'OFF'
+        return WASHERDRYLEVEL(drylevel)
     
     @property
     def reservetime_min(self):
