@@ -919,6 +919,7 @@ class WASHERSTATE(enum.Enum):
     DETECTING = "@WM_STATE_DETECTING_W"
     ADD_DRAIN = "WM_STATE_ADD_DRAIN_W"
     DETERGENT_AMOUNT = "@WM_STATE_DETERGENT_AMOUNT_W"
+    DEMO = "@WM_STATE_DEMO_W"
     RUNNING = "@WM_STATE_RUNNING_W"
     PREWASH = "@WM_STATE_PREWASH_W"
     RINSING = "@WM_STATE_RINSING_W"
@@ -950,10 +951,16 @@ class WASHERSPINSPEED(enum.Enum):
     
     NOSPIN = "@WM_TITAN2_OPTION_SPIN_NO_SPIN_W"
     SPIN_400 = "@WM_TITAN2_OPTION_SPIN_400_W"
+    SPIN_600 = "@WM_TITAN2_OPTION_SPIN_600_W"
+    SPIN_700 = "@WM_TITAN2_OPTION_SPIN_700_W"
     SPIN_800 = "@WM_TITAN2_OPTION_SPIN_800_W"
+    SPIN_900 = "@WM_TITAN2_OPTION_SPIN_900_W"
     SPIN_1000 = "@WM_TITAN2_OPTION_SPIN_1000_W"
+    SPIN_1100 = "@WM_TITAN2_OPTION_SPIN_1100_W"
     SPIN_1200 = "@WM_TITAN2_OPTION_SPIN_1200_W"
     SPIN_1400 = "@WM_TITAN2_OPTION_SPIN_1400_W"
+    SPIN_1600 = "@WM_TITAN2_OPTION_SPIN_1600_W"
+    MAX = "@WM_TITAN2_OPTION_SPIN_MAX_W"
 
 class WASHERERROR(enum.Enum):
     
@@ -1065,6 +1072,10 @@ class WasherStatus(object):
     @property
     def reservetime_hour(self):
         return self.data['Reserve_Time_H']
+    
+    @property
+    def drylevel(self):
+        return self.data['DryLevel']
     
     @property
     def reservetime_min(self):
